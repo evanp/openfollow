@@ -43,22 +43,45 @@ There are two main API endpoints.
   
   Example:
   
-  [
-      "@t",
-      "evan@status.net",
-      "http://facebook.com/faddah",
-      "https://plus.google.com/113651174506128852447/posts",
-      "Jan-Christoph Borchardt"
-  ]
+  > [
+  >    "@t",
+  >    "evan@status.net",
+  >    "http://facebook.com/faddah",
+  >    "https://plus.google.com/113651174506128852447/posts",
+  >    "Jan-Christoph Borchardt"
+  > ]
   
   returns
   
-  {
-      "@t": ["http://tantek.com/"],
-      "evan@status.net": ["http://identi.ca/evan", "http://evanpro.tumblr.com/"],
-      "http://facebook.com/faddah": [],
-      "https://plus.google.com/113651174506128852447/posts": ["http://blog.romeda.org/"],
-      "Jan-Christoph Borchardt": ["https://joindiaspora.com/u/jancborchardt"]
-  }
+  > {
+  >    "@t": ["http://tantek.com/"],
+  >    "evan@status.net": ["http://identi.ca/evan", "http://evanpro.tumblr.com/"],
+  >    "http://facebook.com/faddah": [],
+  >    "https://plus.google.com/113651174506128852447/posts": ["http://blog.romeda.org/"],
+  >    "Jan-Christoph Borchardt": ["https://joindiaspora.com/u/jancborchardt"]
+  > }
+
+  Note: every ID is returned, even if we don't have info on it.
   
-      
+  Every result would return as an array, even if there's only one element.
+  
+* /v1/search
+
+  Takes a single string JSON document, and returns a list of known accounts.
+  
+  Single string will be Facebook, Twitter, or Google+ ID, email or plain-text name.
+  
+  Results will be a JSON document that's an array of strings, one string for each known related ID.
+  
+  So this request:
+  
+  >   "Jan-Christoph Borchardt"
+     
+  ...would return this result:
+  
+  >    [
+  >      "https://joindiaspora.com/u/jancborchardt",
+  >      "https://twitter.com/jancborchardt",
+  >      "http://jancborchardt.net/",
+  >      "http://janinamerica.tumblr.com/"
+  >    ]
