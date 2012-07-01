@@ -1,4 +1,4 @@
-openrealtime-net
+openfollow
 ================
 
 API server to find people on the federated social web by email
