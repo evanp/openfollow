@@ -2,6 +2,7 @@
     "name": "openrealtime-net"
   , "version": "0.0.1"
   , "private": true
+  , "engines": { "node": "~0.6.x" },
   , "dependencies": {
       "express": "3.0"
     , "jade": ">= 0.0.1"
@@ -11,7 +12,5 @@
     , "debug": "*"
     , "databank": "0.12.x"
   }
-  , "scripts": {
-      "test": "mocha -r should -R nyan"
-  }
+  , "scripts": { "test": "mocha -r should" }
 }
