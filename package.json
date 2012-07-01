@@ -9,6 +9,7 @@
     , "mocha": "*"
     , "should": "*"
     , "debug": "*"
+    , "databank": "0.12.x"
   }
   , "scripts": {
       "test": "mocha -r should -R nyan"
