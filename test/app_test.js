@@ -33,6 +33,7 @@ describe('app', function() {
                  function(err, resp, body) {
             resp.statusCode.should.equal(200);
             body.should.have.property('http://twitter.com/person');
+            body['http://twitter.com/person'].should.strictEqual([]);
             done();
         });
     });
