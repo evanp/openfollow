@@ -43,13 +43,16 @@ There are two main API endpoints.
   
   Example:
   
-  > [
-  >    "@t",
-  >    "evan@status.net",
-  >    "http://facebook.com/faddah",
-  >    "https://plus.google.com/113651174506128852447/posts",
-  >    "Jan-Christoph Borchardt"
-  > ]
+  > {
+  >    "hook": "http://example.com/search-results/SOMETHINGUNIQUE",
+  >    "ids": [
+  >             "@t",
+  >             "evan@status.net",
+  >             "http://facebook.com/faddah",
+  >             "https://plus.google.com/113651174506128852447/posts",
+  >             "Jan-Christoph Borchardt"
+  >    ]
+  > }
   
   returns
   
