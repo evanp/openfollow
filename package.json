@@ -2,7 +2,7 @@
     "name": "openrealtime-net"
   , "version": "0.0.1"
   , "private": true
-  , "engines": { "node": "~0.6.x" },
+  , "engines": { "node": "~0.6.x" }
   , "dependencies": {
       "express": "3.0"
     , "jade": ">= 0.0.1"
