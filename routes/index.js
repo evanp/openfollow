@@ -5,7 +5,7 @@ var person_db = require('../lib/Person');
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' })
+    res.render('index', { title: 'Express' })
 };
 
 exports.search = function(req, res) {

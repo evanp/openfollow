@@ -1,6 +1,9 @@
+var assert = require("assert");
+
 describe('person', function() {
 
-  var Person = require('../lib/Person').Person;
+  var Person = require('../lib/Person').Person,
+      Identifier = require('../lib/Identifier').Identifier;
 
   before(function(done) {
       var databank = require('databank'),
@@ -19,6 +22,24 @@ describe('person', function() {
   });
 
   it('should fail to find an unknown person', function(done) {
-      Person.get("unknown", done);
+      Person.get("unknown", function(err, person) {
+          if (!err) {
+              done(new Error("Shoulda failed"));
+          } else {
+              done();
+          }
+      });
+  });
+
+  it('should automatically add a uuid to a new person', function(done) {
+      Person.create({}, function(err, person) {
+          if (err) {
+              done(err);
+          } else {
+              assert.ok(person);
+              assert.ok(person.uuid);
+              done();
+          }
+      });
   });
 });
