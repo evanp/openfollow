@@ -43,23 +43,23 @@ There are two main API endpoints.
   
   Example:
   
-  [
-      "@t",
-      "evan@status.net",
-      "http://facebook.com/faddah",
-      "https://plus.google.com/113651174506128852447/posts",
-      "Jan-Christoph Borchardt"
-  ]
+  > [
+  >    "@t",
+  >    "evan@status.net",
+  >    "http://facebook.com/faddah",
+  >    "https://plus.google.com/113651174506128852447/posts",
+  >    "Jan-Christoph Borchardt"
+  > ]
   
   returns
   
-  {
-      "@t": ["http://tantek.com/"],
-      "evan@status.net": ["http://identi.ca/evan", "http://evanpro.tumblr.com/"],
-      "http://facebook.com/faddah": [],
-      "https://plus.google.com/113651174506128852447/posts": ["http://blog.romeda.org/"],
-      "Jan-Christoph Borchardt": ["https://joindiaspora.com/u/jancborchardt"]
-  }
+  > {
+  >    "@t": ["http://tantek.com/"],
+  >    "evan@status.net": ["http://identi.ca/evan", "http://evanpro.tumblr.com/"],
+  >    "http://facebook.com/faddah": [],
+  >    "https://plus.google.com/113651174506128852447/posts": ["http://blog.romeda.org/"],
+  >    "Jan-Christoph Borchardt": ["https://joindiaspora.com/u/jancborchardt"]
+  > }
 
   Note: every ID is returned, even if we don't have info on it.
   
@@ -75,13 +75,13 @@ There are two main API endpoints.
   
   So this request:
   
-     "Jan-Christoph Borchardt"
+  >   "Jan-Christoph Borchardt"
      
   ...would return this result:
   
-      [
-        "https://joindiaspora.com/u/jancborchardt",
-        "https://twitter.com/jancborchardt",
-        "http://jancborchardt.net/",
-        "http://janinamerica.tumblr.com/"
-      ]
+  >    [
+  >      "https://joindiaspora.com/u/jancborchardt",
+  >      "https://twitter.com/jancborchardt",
+  >      "http://jancborchardt.net/",
+  >      "http://janinamerica.tumblr.com/"
+  >    ]
