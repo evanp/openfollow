@@ -27,7 +27,7 @@ describe('app', function() {
     });
 
     it('looks up an id', function(done) {
-        request({url:'http://localhost:3000/',
+        request({url:'http://localhost:3000/v0.1/ids',
                  json: {ids:['http://twitter.com/person']}},
                  function(err, resp, body) {
             resp.statusCode.should.equal(200);
