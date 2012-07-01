@@ -21,5 +21,44 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+API
+---
 
+There are two main API endpoints.
 
+* /v1/pubsub
+  
+  Takes a JSON document with a bunch of identifiers.
+ 
+  Returns a JSON document that maps those identifiers to accounts with
+  associated PubSubHubbub-enabled feeds.
+  
+  Identifiers can be:
+  
+  * Twitter handle like "@evanpro"
+  * Email address like "evan@status.net"
+  * Facebook profile URL like "http://facebook.com/evan.prodromou"
+  * Google+ profile URL like "https://plus.google.com/104323674441008487802/posts"
+  * Plain text string like "Evan Prodromou"
+  
+  Example:
+  
+  [
+      "@t",
+      "evan@status.net",
+      "http://facebook.com/faddah",
+      "https://plus.google.com/113651174506128852447/posts",
+      "Jan-Christoph Borchardt"
+  ]
+  
+  returns
+  
+  {
+      "@t": ["http://tantek.com/"],
+      "evan@status.net": ["http://identi.ca/evan", "http://evanpro.tumblr.com/"],
+      "http://facebook.com/faddah": [],
+      "https://plus.google.com/113651174506128852447/posts": ["http://blog.romeda.org/"],
+      "Jan-Christoph Borchardt": ["https://joindiaspora.com/u/jancborchardt"]
+  }
+  
+      
