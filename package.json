@@ -5,8 +5,10 @@
   , "dependencies": {
       "express": "3.0"
     , "jade": ">= 0.0.1"
+    , "request": "*"
     , "mocha": "*"
     , "should": "*"
+    , "debug": "*"
   }
   , "scripts": {
       "test": "mocha -r should -R nyan"
