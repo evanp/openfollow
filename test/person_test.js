@@ -33,8 +33,13 @@ describe('person', function() {
 
   it('should automatically add a uuid to a new person', function(done) {
       Person.create({}, function(err, person) {
-          assert.ok(person);
-          assert.ok(person.uuid);
+          if (err) {
+              done(err);
+          } else {
+              assert.ok(person);
+              assert.ok(person.uuid);
+              done();
+          }
       });
   });
 });
