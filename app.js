@@ -8,7 +8,8 @@ var express = require('express')
   , routes = require('./routes')
   , config = require('./config')
   , http = require('http')
-  , Databank = databank.Databank;
+  , Databank = databank.Databank,
+  , DatabankObject = databank.DatabankObject;
 
 var app = module.exports = express();
 
@@ -39,9 +40,10 @@ db.connect(params, function(err) {
     if (err) {
         console.error("Can't connect to database: " + err.message);
     } else {
+        // Global database
+        DatabankObject.bank = db;
         http.createServer(app).listen(app.get('port'), function(){
             console.log("Express server listening on port " + app.get('port'));
         });
     }
 });
-
