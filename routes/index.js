@@ -32,7 +32,7 @@ exports.search = function(req, res, next) {
             });
         };
 
-    async.map(ids, Person.fromIdentifier, function(err, people) {
+    async.map(ids, getPerson, function(err, people) {
         if (err) {
             next(err);
         } else {
