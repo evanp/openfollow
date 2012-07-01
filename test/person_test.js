@@ -22,7 +22,13 @@ describe('person', function() {
   });
 
   it('should fail to find an unknown person', function(done) {
-      Person.get("unknown", done);
+      Person.get("unknown", function(err, person) {
+          if (!err) {
+              done(new Error("Shoulda failed"));
+          } else {
+              done();
+          }
+      });
   });
 
   it('should automatically add a uuid to a new person', function(done) {
