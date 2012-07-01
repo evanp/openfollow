@@ -25,4 +25,13 @@ describe('app', function() {
             done();
         });
     });
+
+    it('looks up an id', function(done) {
+        request({url:'http://localhost:3000/',
+                 json: {ids:['http://twitter.com/person']}},
+                 function(err, resp, body) {
+            resp.statusCode.should.equal(200);
+            done();
+        });
+    });
 });
