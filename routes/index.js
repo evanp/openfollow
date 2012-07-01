@@ -18,11 +18,11 @@ exports.search = function(req, res) {
 
     async.map(ids, Person.fromIdentifier, function(err, people) {
         async.map(people, getOthers, function(err, identlist) {
-            var i, map = {};
+            var i, results = {};
             for (i = 0; i < ids.length; i++) {
-                map[ids[i]] = identlist[i];
+                results[ids[i]] = identlist[i];
             }
-            res.json(map);
+            res.json(results);
         });
     });
 };
