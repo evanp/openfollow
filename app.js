@@ -8,7 +8,7 @@ var express = require('express')
   , routes = require('./routes')
   , config = require('./config')
   , http = require('http')
-  , Databank = databank.Databank,
+  , Databank = databank.Databank
   , DatabankObject = databank.DatabankObject;
 
 var app = module.exports = express();
