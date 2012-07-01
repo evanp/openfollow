@@ -1,0 +1,8 @@
+body { padding:60px 0 40px; background:#ddd url(../img/escheresque.png) repeat; }
+/* background by Jan Meeus http://subtlepatterns.com/?p=1257 */
+
+.brand { position:relative; display:block; text-align:center; margin:1em 0 .3em;
+	font-size:7em; font-weight:bold; color:rgba(240,240,240,.6); text-shadow:0 0 1em rgba(100,100,100,.6); }
+
+.hero-unit { width:50em; margin:6em auto; padding:0; background:none; text-align:center; }
+	.hero-unit .btn img { height:1.5em; margin:-.3em .3em 0 0; }
