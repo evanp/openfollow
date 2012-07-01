@@ -9,9 +9,23 @@ exports.index = function(req, res){
 };
 
 exports.search = function(req, res) {
+  answer = {}
+
   req.body.ids.forEach(function(id) {
     console.log("searching on "+id);
-    var person = person_db.Person.fromIdentifier(id);
+    person_db.Person.fromIdentifier(id, function(err,data){callback(id,err,data)});
   })
-  res.json(req.body)
+
+  function callback(id, err, data) {
+    answer[id] = [];
+    if(err) {
+      answer.status = "ERR"
+    } else {
+      answer.status = "OK"
+    }
+    // if req.body.ids.length == the_end, then answer
+    //res.json(answer)
+  }
+
 }
+
