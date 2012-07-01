@@ -4,8 +4,11 @@
  */
 
 var express = require('express')
+  , databank = require('databank')
   , routes = require('./routes')
-  , http = require('http');
+  , config = require('./config')
+  , http = require('http')
+  , Databank = databank.Databank;
 
 var app = module.exports = express();
 
@@ -27,6 +30,18 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+var driver = config.driver || "memory";
+var params = config.params || {};
+
+var db = Databank.get(driver, params);
+
+db.connect(params, function(err) {
+    if (err) {
+        console.error("Can't connect to database: " + err.message);
+    } else {
+        http.createServer(app).listen(app.get('port'), function(){
+            console.log("Express server listening on port " + app.get('port'));
+        });
+    }
 });
+
