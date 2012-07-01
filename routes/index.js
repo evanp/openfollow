@@ -13,7 +13,11 @@ exports.index = function(req, res){
 exports.search = function(req, res) {
     var ids = req.body.ids,
         getOthers = function(person, callback) {
-            person.getIdentifiers(callback);
+            if (person) {
+                person.getIdentifiers(callback);
+            } else {
+                callback(null, []);
+            }
         };
 
     async.map(ids, Person.fromIdentifier, function(err, people) {
