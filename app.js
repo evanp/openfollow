@@ -30,6 +30,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.post('/v0.1/ids', routes.search);
 
 var driver = config.driver || "memory";
 var params = config.params || {};
