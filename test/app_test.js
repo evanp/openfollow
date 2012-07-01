@@ -37,4 +37,18 @@ describe('app', function() {
             done();
         });
     });
+
+    it('looks up multiple IDs', function(done) {
+        request({url:'http://localhost:3000/v0.1/ids',
+                 method: 'POST',
+                 json: {ids:['http://twitter.com/person1', 'http://twitter.com/person2']}},
+                 function(err, resp, body) {
+            resp.statusCode.should.equal(200);
+            body.should.have.property('http://twitter.com/person1');
+            body.should.have.property('http://twitter.com/person2');
+            body['http://twitter.com/person1'].should.be.empty;
+            body['http://twitter.com/person2'].should.be.empty;
+            done();
+        });
+    });
 });
