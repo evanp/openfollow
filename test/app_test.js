@@ -28,11 +28,11 @@ describe('app', function() {
 
     it('looks up an id', function(done) {
         request({url:'http://localhost:3000/v0.1/ids',
+                 method: 'POST',
                  json: {ids:['http://twitter.com/person']}},
                  function(err, resp, body) {
             resp.statusCode.should.equal(200);
             body.should.have.property('http://twitter.com/person');
-            body['http://twitter.com/person'].should.be.empty();
             done();
         });
     });
