@@ -24,27 +24,37 @@ limitations under the License.
 API
 ---
 
-There are two main API endpoints.
+There one main API endpoint.
 
-* /v1/pubsub
+* /v1/ids
   
-  Takes a JSON document with a bunch of identifiers.
- 
-  Returns a JSON document that maps those identifiers to accounts with
-  associated PubSubHubbub-enabled feeds.
+  Takes a JSON document with fields "hook", "ids", "filter".
+
+  "hook" is a Webhook to return additional results "later".
   
-  Identifiers can be:
+  "filter" is a filter for the results. Current values include:
   
-  * Twitter handle like "@evanpro"
-  * Email address like "evan@status.net"
+  * "pubsub": only accounts that provide PubSubHubbub-enabled feeds
+
+  "ids" is an array of identifier strings. Identifiers can be:
+  
+  * An URL like "http://tantek.com"
+  * An email address like "evan@status.net"
+  
+  Notable kinds of URLs are:
+  
+  * Twitter profile URL like "https://twitter.com/evanpro"
   * Facebook profile URL like "http://facebook.com/evan.prodromou"
   * Google+ profile URL like "https://plus.google.com/104323674441008487802/posts"
-  * Plain text string like "Evan Prodromou"
+
+  Returns a JSON document that maps those identifiers to known
+  accounts for the same user.
   
   Example:
   
   > {
   >    "hook": "http://example.com/search-results/SOMETHINGUNIQUE",
+  >    "filter": "pubsub",
   >    "ids": [
   >             "@t",
   >             "evan@status.net",
@@ -67,24 +77,3 @@ There are two main API endpoints.
   Note: every ID is returned, even if we don't have info on it.
   
   Every result would return as an array, even if there's only one element.
-  
-* /v1/search
-
-  Takes a single string JSON document, and returns a list of known accounts.
-  
-  Single string will be Facebook, Twitter, or Google+ ID, email or plain-text name.
-  
-  Results will be a JSON document that's an array of strings, one string for each known related ID.
-  
-  So this request:
-  
-  >   "Jan-Christoph Borchardt"
-     
-  ...would return this result:
-  
-  >    [
-  >      "https://joindiaspora.com/u/jancborchardt",
-  >      "https://twitter.com/jancborchardt",
-  >      "http://jancborchardt.net/",
-  >      "http://janinamerica.tumblr.com/"
-  >    ]
