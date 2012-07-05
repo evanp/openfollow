@@ -1,4 +1,7 @@
 var spawn = require('child_process').spawn
+  , async = require('async')
+  , Person = require('../lib/Person').Person
+  , Identifier = require('../lib/Identifier').Identifier
   , server = require('../lib/server')
   , request = require('request');
 
@@ -15,7 +18,28 @@ describe('app', function() {
 
         app = server.newServer(config);
 
-        app.run(done);
+        app.run(function(err) {
+            if (err) throw err;
+            async.waterfall([
+                function(cb) {
+                    Person.create({}, cb);
+                },
+                function(person, cb) {
+                    async.parallel([
+                        function(cb) {
+                            Identifier.create({id: "http://twitter.com/evanpro",
+                                               person: person.uuid},
+                                              cb);
+                        },
+                        function(cb) {
+                            Identifier.create({id: "http://identi.ca/evan",
+                                               person: person.uuid},
+                                              cb);
+                        }
+                    ], cb);
+                }
+            ], done);
+        });
     });
 
     after(function(done) {
@@ -29,7 +53,7 @@ describe('app', function() {
         });
     });
 
-    it('looks up an id', function(done) {
+    it('looks up a missing ID', function(done) {
         request({url:'http://localhost:2342/v0.1/ids',
                  method: 'POST',
                  json: {ids:['http://twitter.com/person']}},
@@ -41,7 +65,7 @@ describe('app', function() {
         });
     });
 
-    it('looks up multiple IDs', function(done) {
+    it('looks up multiple multiple missing IDs', function(done) {
         request({url:'http://localhost:2342/v0.1/ids',
                  method: 'POST',
                  json: {ids:['http://twitter.com/person1', 'http://twitter.com/person2']}},
@@ -54,4 +78,19 @@ describe('app', function() {
             done();
         });
     });
+
+    it('looks up a known ID', function(done) {
+        request({url:'http://localhost:2342/v0.1/ids',
+                 method: 'POST',
+                 json: {ids:['http://twitter.com/evanpro']}},
+                 function(err, resp, body) {
+            resp.statusCode.should.equal(200);
+            body.should.have.property('http://twitter.com/evanpro');
+            body['http://twitter.com/evanpro'].should.be.an.instanceOf(Array);
+            body['http://twitter.com/evanpro'].should.include('http://identi.ca/evan');
+            body['http://twitter.com/evanpro'].should.include('http://twitter.com/evanpro');
+            done();
+        });
+    });
+
 });
