@@ -38,6 +38,8 @@ describe('person', function() {
           } else {
               assert.ok(person);
               assert.ok(person.uuid);
+              assert.ok(person.created);
+              assert.ok(person.modified);
               done();
           }
       });
