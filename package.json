@@ -14,5 +14,8 @@
     , "node-uuid": "1.3.x"
     , "async": "0.1.x"
   }
-  , "scripts": { "test": "mocha -r should" }
+  , "scripts": {
+      "test": "mocha -r should"
+    , "start": "node app.js"
+   }
 }
