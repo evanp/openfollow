@@ -1,7 +1,7 @@
 var spawn = require('child_process').spawn
   , async = require('async')
-  , Person = require('../lib/Person').Person
-  , Identifier = require('../lib/Identifier').Identifier
+  , Person = require('../lib/Person')
+  , Identifier = require('../lib/Identifier')
   , server = require('../lib/server')
   , request = require('request');
 

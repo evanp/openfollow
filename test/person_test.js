@@ -2,8 +2,8 @@ var assert = require("assert");
 
 describe('person', function() {
 
-  var Person = require('../lib/Person').Person,
-      Identifier = require('../lib/Identifier').Identifier;
+  var Person = require('../lib/Person'),
+      Identifier = require('../lib/Identifier');
 
   before(function(done) {
       var databank = require('databank'),

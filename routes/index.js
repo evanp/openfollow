@@ -1,6 +1,5 @@
-var person_db = require('../lib/Person'),
+var Person = require('../lib/Person'),
     NoSuchThingError = require('databank').NoSuchThingError,
-    Person = person_db.Person,
     async = require('async');
 
 /*
