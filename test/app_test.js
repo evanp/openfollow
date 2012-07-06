@@ -88,7 +88,7 @@ describe('app', function() {
             body.should.have.property('http://twitter.com/evanpro');
             body['http://twitter.com/evanpro'].should.be.an.instanceOf(Array);
             body['http://twitter.com/evanpro'].should.include('http://identi.ca/evan');
-            body['http://twitter.com/evanpro'].should.include('http://twitter.com/evanpro');
+            body['http://twitter.com/evanpro'].should.include('https://twitter.com/evanpro');
             done();
         });
     });
