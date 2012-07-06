@@ -67,4 +67,28 @@ describe('identifier', function() {
         assert.equal(can, "http://example.com/EVANPRO");
         done();
     });
+
+    it('should change hashbang Twitter URLs to regular Twitter URLs', function(done) {
+        var can = Identifier.canonical("https://twitter.com/#!/evanpro");
+        assert.equal(can, "https://twitter.com/evanpro");
+        done();
+    });
+
+    it('should change http Twitter URLs to https', function(done) {
+        var can = Identifier.canonical("http://twitter.com/evanpro");
+        assert.equal(can, "https://twitter.com/evanpro");
+        done();
+    });
+
+    it('should change /-terminated Twitter URLs to no /', function(done) {
+        var can = Identifier.canonical("https://twitter.com/evanpro/");
+        assert.equal(can, "https://twitter.com/evanpro");
+        done();
+    });
+
+    it('should change www.twitter.com URLs to no-www', function(done) {
+        var can = Identifier.canonical("https://www.twitter.com/evanpro");
+        assert.equal(can, "https://twitter.com/evanpro");
+        done();
+    });
 });
