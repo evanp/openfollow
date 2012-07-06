@@ -68,7 +68,7 @@ describe("identifier", function() {
         });
     });
 
-    it("should unify() identifiers when making complementary Edges", function(done) {
+    it("should unify() identifiers when adding an Edge and its inverted Edge", function(done) {
         var props1 = {from: "http://example.com/unknown5",
                       to: "http://example.com/unknown6"},
             props2 = {from: props1.to,
