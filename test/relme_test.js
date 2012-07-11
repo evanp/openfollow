@@ -11,6 +11,11 @@ describe("relme", function() {
     before(function(done) {
         app = express.createServer();
 
+        app.configure(function(){
+            app.set('port', 4816);
+            app.use(app.router);
+        });
+
         app.get("/missing", function(req, res, next) {
             res.send("Not here", 404);
         });
@@ -36,8 +41,6 @@ describe("relme", function() {
                      "<li></ul></body></html>", 200);
         });
 
-        app.set('port', 4816);
-        app.use(app.router);
 
         app.on("listening", function() {
             console.log("Listening");
