@@ -31,8 +31,13 @@ describe("relme", function() {
                      "<li><a href='http://video.example.com/user2' rel='me video'>Video User 2</a></li>"+
                      "<li></ul></body></html>", 200);
         });
+        app.on("listening", function() {
+            done();
+        });
+        app.on("error", function(err) {
+            done(err);
+        });
         app.listen(4816);
-        done();
     });
 
     it("should be a singleton object", function(done) {
