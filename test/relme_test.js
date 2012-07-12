@@ -11,11 +11,6 @@ describe("relme", function() {
     before(function(done) {
         app = express.createServer();
 
-        app.configure(function(){
-            app.set('port', 4816);
-            app.use(app.router);
-        });
-
         app.get("/missing", function(req, res, next) {
             res.send("Not here", 404);
         });
@@ -41,18 +36,9 @@ describe("relme", function() {
                      "<li></ul></body></html>", 200);
         });
 
-
-        app.on("listening", function() {
-            console.log("Listening");
+        app.listen(4816, function() {
             done();
         });
-
-        app.on("error", function(err) {
-            console.log("Error");
-            done(err);
-        });
-
-        app.listen(4816, "localhost");
     });
 
     it("should be a singleton object", function(done) {
@@ -66,11 +52,25 @@ describe("relme", function() {
         done();
     });
 
+    it("should have a custom error class for type mismatches", function(done) {
+        RelMe.should.have.property("TypeError");
+        RelMe.TypeError.should.be.a("function");
+        done();
+    });
+
+    it("should have a custom error class for HTTP failures", function(done) {
+        RelMe.should.have.property("HTTPError");
+        RelMe.HTTPError.should.be.a("function");
+        done();
+    });
+
     it("should give an error when asking for a missing resource", function(done) {
         RelMe.getLinks("http://localhost:4816/missing", function(err, links) {
             should.exist(err);
             err.should.be.a("object");
-            err.should.be.an.instanceOf(Error);
+            err.should.be.an.instanceOf(RelMe.HTTPError);
+            err.should.have.property("code");
+            err.code.should.equal(404);
             done();
         });
     });
@@ -79,7 +79,8 @@ describe("relme", function() {
         RelMe.getLinks("http://localhost:4816/image.png", function(err, links) {
             should.exist(err);
             err.should.be.a("object");
-            err.should.be.an.instanceOf(Error);
+            err.should.be.an.instanceOf(RelMe.TypeError);
+            err.should.have.property("type");
             done();
         });
     });
