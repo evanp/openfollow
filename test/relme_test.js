@@ -70,6 +70,23 @@ describe("relme", function() {
         done();
     });
 
+    it("should have a custom error class for HTTP failures", function(done) {
+        RelMe.should.have.property("ProtocolError");
+        RelMe.ProtocolError.should.be.a("function");
+        done();
+    });
+
+    it("should give an error when asking for a non-HTTP resource", function(done) {
+        RelMe.getLinks("ftp://localhost/some/path", function(err, links) {
+            should.exist(err);
+            err.should.be.a("object");
+            err.should.be.an.instanceOf(RelMe.ProtocolError);
+            err.should.have.property("protocol");
+            err.protocol.should.equal("ftp:");
+            done();
+        });
+    });
+
     it("should give an error when asking for a missing resource", function(done) {
         RelMe.getLinks("http://localhost:4816/missing", function(err, links) {
             should.exist(err);
