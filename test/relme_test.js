@@ -5,14 +5,20 @@ var assert = require("assert"),
 
 describe("relme", function() {
 
-    var RelMe = require("../lib/relme"),
-        app;
+    var app, RelMe;
 
     before(function(done) {
+
+        // Initialize the module.
+
+        RelMe = require("../lib/relme");
+
+        // Initialize the app.
+
         app = express.createServer();
 
         app.get("/missing", function(req, res, next) {
-            res.send("Not here", 404);
+            res.send("Not here", {"Content-Type": "text/plain"}, 404);
         });
 
         app.get("/image.png", function(req, res, next) {
@@ -36,7 +42,7 @@ describe("relme", function() {
                      "<li></ul></body></html>", 200);
         });
 
-        app.listen(4816, function() {
+        app.listen(4816, "localhost", function() {
             done();
         });
     });
