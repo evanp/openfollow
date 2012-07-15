@@ -17,10 +17,6 @@ describe("relme", function() {
 
         app = express.createServer();
 
-        app.get("/missing", function(req, res, next) {
-            res.send("Not here", {"Content-Type": "text/plain"}, 404);
-        });
-
         app.get("/image.png", function(req, res, next) {
             res.sendfile(__dirname + "/image.png");
         });
@@ -89,6 +85,8 @@ describe("relme", function() {
 
     it("should give an error when asking for a missing resource", function(done) {
         RelMe.getLinks("http://localhost:4816/missing", function(err, links) {
+            console.log(err);
+            console.log(links);
             should.exist(err);
             err.should.be.a("object");
             err.should.be.an.instanceOf(RelMe.HTTPError);
