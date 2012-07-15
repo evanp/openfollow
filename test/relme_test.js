@@ -112,7 +112,8 @@ describe("relme", function() {
         RelMe.getLinks("http://localhost:4816/user1.html", function(err, links) {
             should.not.exist(err);
             should.exist(links);
-            links.should.be.a("array");
+            links.should.be.a("object");
+            links.should.be.an.instanceOf(Array);
             links.should.have.length(0);
             done();
         });
@@ -122,7 +123,8 @@ describe("relme", function() {
         RelMe.getLinks("http://localhost:4816/user2.html", function(err, links) {
             should.not.exist(err);
             should.exist(links);
-            links.should.be.a("array");
+            links.should.be.a("object");
+            links.should.be.an.instanceOf(Array);
             links.should.have.length(3);
             links.should.include("http://geo.example.com/user2");
             links.should.include("http://user2.example.net/blog");
